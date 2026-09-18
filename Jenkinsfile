@@ -35,7 +35,7 @@ pipeline {
     post{
         always{
             echo "I will run even pipeline fail"
-            cleanWS()
+            cleanWs()
         }
         success{
             echo "I will run if sucess"
