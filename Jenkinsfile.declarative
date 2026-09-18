@@ -23,13 +23,13 @@ pipeline {
     post{
         always{
             echo "I will run even pipeline fail"
-            //cleanWS()
+            cleanWs()
         }
-        // success{
-        //     echo "I will run if sucess"
-        // }
-        // failure{
-        //     echo "I will run if failure"
-        // }
+        success{
+            echo "I will run if sucess"
+        }
+        failure{
+            echo "I will run if failure"
+        }
     }
 }
