@@ -1,15 +1,20 @@
 pipeline {
+    agent {
+        label 'AGENT-1'
+    }
     environment{
         COURSE= "Jenkins"
     }
-    agent {
-        label 'AGENT-1'
+    options {
+        timeout(time: 10, unit: 'SECONDS') 
+        disableConcurrentBuilds()
     }
     stages {
         stage ('Build') {
             steps{
                sh """
                  echo "$COURSE" 
+                 sleep 10
                  echo "Building"
                  env
                """
@@ -34,15 +39,18 @@ pipeline {
 
     }
     post{
-        always{
+        always {
             echo "I will run even pipeline fail"
             cleanWs()
         }
-        success{
+        success {
             echo "I will run if sucess"
         }
-        failure{
+        failure {
             echo "I will run if failure"
+        }
+        aborted {
+            echo "pipeline is aborted"
         }
     }
 }
